@@ -1,16 +1,87 @@
-Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-Properties: 
-  IpAddressType: String
-  LoadBalancerAttributes: 
-    - LoadBalancerAttribute
-  Name: String
-  Scheme: String
-  SecurityGroups: 
-    - String
-  SubnetMappings: 
-    - SubnetMapping
-  Subnets: 
-    - String
-  Tags: 
-    - Tag
-  Type: String
+
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: CF-ALB this template create a aplication load balancers
+
+Metadata:
+  AWS::CLouformation::INterface:
+    ParameterGroups:
+    - 
+      Label:
+        dafualt: "Certificate Arn"
+      ParameterName:
+        - AcmCertificate 
+    -
+      Label:
+        default: "Export VPC Stack Name"
+      Parameters:
+        - ExportVPCStackName
+
+
+Parameters:
+  AcmCertification:
+    Description: This is the ARN Certification Manger's Certification
+    Type: String
+
+  ExportVpcStackName:
+    Description: The name of the vpc  stack the exports value
+    Type: String 
+
+
+Resources:
+  ApplicationLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties: 
+      Name: CF-ALB
+      SecurityGroups: 
+      Subnets:
+
+  ALBlistenerNosalCertificate:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Property:
+      DefaltActions:
+        - RedirectConfig:
+            Host: '#{host}'
+            Path: '/#path}'
+            Port: '443'
+            Protocol: HTTPS 
+            StatusCOde: HTTP_301
+          Type:
+      LoadBalancerARN:
+      Port: 
+      Protocol: 
+
+  ALBListenerSslCertification:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties: 
+      Certificates:
+        - CertificateARN:
+      DefaultActions:
+        - Type:
+          TargetGroupArn:
+      LoadBalancerARN:
+      Port: 
+      Protocol:
+
+  ALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds:
+      HealthCheckPath:
+      HealthCheckTimeoutSeconds:
+      HealthyThresholdCount:
+      Matcher: 
+        HttpCode:
+      Name:
+      Port: 
+      Protocol:
+      UnhealthyThresholdCount:
+      VpcId:
+
+
+
+  
+  
+
+Outputs:
+  PathToMasterStackFile

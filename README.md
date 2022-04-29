@@ -1,2 +1,3 @@
 # CloudformationALB
- CF template for a nested stakc
+ CF template for a nested stack
+ 
